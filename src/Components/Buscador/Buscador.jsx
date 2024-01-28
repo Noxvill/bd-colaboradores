@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form';
 
-const Buscador =()=>{
+const Buscador =({ actualizarBusqueda })=>{
 
 return(
 
@@ -11,6 +11,7 @@ return(
         id="inputcolaborador"
         placeholder="Busca un colaborador"
         className="form-control-sm"
+        onChange={(e) => actualizarBusqueda(e.target.value)}
       />
 </>
 

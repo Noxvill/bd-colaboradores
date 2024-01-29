@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import './Formulario.css'
 import { useState } from 'react'
 import { BaseColaboradores } from '../Js/BaseColaboradores';
+import Alert from '../Alert/Alert';
 
 
 const Formulario =(props)=>{
@@ -48,24 +49,25 @@ const capturaInputPhone = (e) => {
 }
 
 
-// Función al enviar el formulario
 const enviarFormulario = (e) => {
-    e.preventDefault()
-    
-    // Genero un id aleatorio, solo para prueba
-    const id= idRandom()
-    const nuevoColaborador = { id, nombre, correo, edad, cargo, telefono };
-    props.agregarColaborador(nuevoColaborador); // Actualiza la lista en el componente App
-   
-    // Vaciamos el formulario
-        setNombre("") 
-        setCorreo("")
-        setEdad("")
-        setCargo("")
-        setTelefono("")
-        
-        }
-    
+  e.preventDefault();
+
+  if (!nombre || !correo || !edad || !cargo || !telefono) {
+    props.setMensajeAlerta({ mensaje: 'Todos los campos son obligatorios', tipo: 'error' });
+    return;
+  }
+
+  const id = idRandom();
+  const nuevoColaborador = { id, nombre, correo, edad, cargo, telefono };
+  props.agregarColaborador(nuevoColaborador);
+
+  setNombre("");
+  setCorreo("");
+  setEdad("");
+  setCargo("");
+  setTelefono("");
+  props.setMensajeAlerta({ mensaje: 'Registro Exitoso', tipo: 'exito' });
+};  
 
 return(
     
@@ -101,7 +103,7 @@ value={telefono}/>
       <Button style={{ width: '16rem', background: 'blue', textAlign: 'center' }} type="submit">
         Agregar Colaborador
       </Button>
-      
+      <Alert/>
  </Form>
 
 </>

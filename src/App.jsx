@@ -16,12 +16,15 @@ function App() {
 
   // Función para agregar un colaborador
   const agregarColaborador = colaborador => {
-    setListacolaboradores(prevColaboradores => {
-      const nuevosColaboradores = [...prevColaboradores, colaborador];
-      console.log("Lista actualizada de colaboradores:", nuevosColaboradores); // Imprime la lista actualizada
-      return nuevosColaboradores;
-    });
+    if (!colaborador.nombre || !colaborador.correo || !colaborador.edad || !colaborador.cargo || !colaborador.telefono) {
+      setMensajeAlerta({ mensaje: 'Todos los campos son obligatorios', tipo: 'error' });
+      return;
+    }
+  
+    setListacolaboradores(prevColaboradores => [...prevColaboradores, colaborador]);
+    setMensajeAlerta({ mensaje: 'Registro Exitoso', tipo: 'exito' });
   };
+  
  
 // Función para actualizar el término de búsqueda
 const actualizarBusqueda = (busqueda) => {
@@ -37,10 +40,11 @@ const colaboradoresFiltrados = Listacolaboradores.filter(colaborador =>
   return (
     <>
 <h2 className="ListColabTitle">Lista de Colaboradores</h2>
+
 <Buscador actualizarBusqueda={actualizarBusqueda}/>
 <Listado Listacolaboradores={colaboradoresFiltrados} />
-<Formulario agregarColaborador={agregarColaborador}/>
-
+<Formulario agregarColaborador={agregarColaborador} setMensajeAlerta={setMensajeAlerta}/>
+<Alert mensaje={mensajeAlerta} />
     </>
   )
 }

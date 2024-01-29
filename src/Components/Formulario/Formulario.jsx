@@ -99,7 +99,7 @@ value={telefono}/>
       </Form.Group>
 
       <Button style={{ width: '16rem', background: 'blue', textAlign: 'center' }} type="submit">
-        Registrarse
+        Agregar Colaborador
       </Button>
       
  </Form>

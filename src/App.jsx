@@ -11,6 +11,8 @@ function App() {
   const [alerta, setAlerta] = useState()
   const [Listacolaboradores, setListacolaboradores] = useState(BaseColaboradores)
   const [terminoBusqueda, setTerminoBusqueda] = useState('');
+  const [mensajeAlerta, setMensajeAlerta] = useState({ mensaje: '', tipo: '' });
+
 
   // Función para agregar un colaborador
   const agregarColaborador = colaborador => {
